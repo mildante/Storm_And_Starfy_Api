@@ -1,0 +1,32 @@
+@StormAndStarfyApi_HostAddress = http://localhost:5051
+@Token = replace-with-jwt
+
+GET {{StormAndStarfyApi_HostAddress}}/api/health
+Accept: application/json
+
+###
+
+POST {{StormAndStarfyApi_HostAddress}}/api/auth/register
+Content-Type: application/json
+
+{
+  "login": "storm",
+  "name": "Storm",
+  "password": "secret12"
+}
+
+###
+
+POST {{StormAndStarfyApi_HostAddress}}/api/auth/login
+Content-Type: application/json
+
+{
+  "login": "storm",
+  "password": "secret12"
+}
+
+###
+
+GET {{StormAndStarfyApi_HostAddress}}/api/auth/me
+Authorization: Bearer {{Token}}
+Accept: application/json

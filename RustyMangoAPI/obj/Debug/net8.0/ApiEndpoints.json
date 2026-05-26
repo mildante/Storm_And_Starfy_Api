@@ -1,24 +1,24 @@
 [
   {
-    "ContainingType": "RustyMangoAPI.Controllers.GameController",
-    "Method": "CompleteLevel",
-    "RelativePath": "api/Game/completeLevel",
+    "ContainingType": "StormAndStarfyApi.Controllers.AuthController",
+    "Method": "Login",
+    "RelativePath": "api/auth/login",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
         "Name": "request",
-        "Type": "RustyMangoAPI.Requests.CompleteLevelRequest",
+        "Type": "StormAndStarfyApi.Requests.LoginRequest",
         "IsRequired": true
       }
     ],
     "ReturnTypes": []
   },
   {
-    "ContainingType": "RustyMangoAPI.Controllers.GameController",
-    "Method": "GetLeaderboard",
-    "RelativePath": "api/Game/getLeaderboard",
+    "ContainingType": "StormAndStarfyApi.Controllers.AuthController",
+    "Method": "Me",
+    "RelativePath": "api/auth/me",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -26,67 +26,38 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "RustyMangoAPI.Controllers.GameController",
-    "Method": "GetProgress",
-    "RelativePath": "api/Game/getProgress",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "userId",
-        "Type": "System.Int32",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "RustyMangoAPI.Controllers.UserController",
-    "Method": "Login",
-    "RelativePath": "api/User/authUser",
+    "ContainingType": "StormAndStarfyApi.Controllers.AuthController",
+    "Method": "Register",
+    "RelativePath": "api/auth/register",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
         "Name": "request",
-        "Type": "RustyMangoAPI.Requests.LoginRequest",
+        "Type": "StormAndStarfyApi.Requests.RegisterRequest",
         "IsRequired": true
       }
     ],
     "ReturnTypes": []
   },
   {
-    "ContainingType": "RustyMangoAPI.Controllers.UserController",
-    "Method": "GetUser",
-    "RelativePath": "api/User/getUser",
+    "ContainingType": "Program\u002B\u003C\u003Ec",
+    "Method": "\u003C\u003CMain\u003E$\u003Eb__0_2",
+    "RelativePath": "api/health",
     "HttpMethod": "GET",
-    "IsController": true,
+    "IsController": false,
     "Order": 0,
-    "Parameters": [
+    "Parameters": [],
+    "ReturnTypes": [
       {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": false
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
       }
     ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "RustyMangoAPI.Controllers.UserController",
-    "Method": "Registration",
-    "RelativePath": "api/User/registrationUser",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "request",
-        "Type": "RustyMangoAPI.Requests.RegisterRequest",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
+    "Tags": [
+      "Health"
+    ]
   }
 ]

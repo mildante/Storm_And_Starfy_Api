@@ -1,8 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using RustyMangoAPI.Models;
-using RustyMangoAPI.Requests;
+using Microsoft.AspNetCore.Mvc;
+using StormAndStarfyApi.Requests;
 
-namespace RustyMangoAPI.Interfaces
+namespace StormAndStarfyApi.Interfaces
 {
     public interface IUserService
     {

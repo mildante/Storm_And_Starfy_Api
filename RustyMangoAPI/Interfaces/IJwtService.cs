@@ -1,6 +1,6 @@
-﻿using RustyMangoApi.Models;
+using StormAndStarfyApi.Models;
 
-namespace RustyMangoAPI.Interfaces
+namespace StormAndStarfyApi.Interfaces
 {
     public interface IJwtService
     {

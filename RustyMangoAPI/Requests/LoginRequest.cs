@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace RustyMangoAPI.Requests
+namespace StormAndStarfyApi.Requests
 {
     public class LoginRequest
     {

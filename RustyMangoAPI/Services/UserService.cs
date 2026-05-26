@@ -1,103 +1,88 @@
-﻿using Microsoft.EntityFrameworkCore;
-using RustyMangoAPI.Data;
-using RustyMangoAPI.Interfaces;
-using RustyMangoAPI.Models;
-using RustyMangoAPI.Requests;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using RustyMangoApi.Models;
+using Microsoft.EntityFrameworkCore;
+using StormAndStarfyApi.Data;
+using StormAndStarfyApi.Interfaces;
+using StormAndStarfyApi.Models;
+using StormAndStarfyApi.Requests;
 
-namespace RustyMangoAPI.Services
+namespace StormAndStarfyApi.Services
 {
     public class UserService : IUserService
     {
         private readonly AppDbContext _context;
         private readonly IJwtService _jwtService;
+        private readonly IPasswordHasher<User> _passwordHasher;
 
-        public UserService(AppDbContext context, IJwtService jwtService)
+        public UserService(
+            AppDbContext context,
+            IJwtService jwtService,
+            IPasswordHasher<User> passwordHasher)
         {
             _context = context;
             _jwtService = jwtService;
+            _passwordHasher = passwordHasher;
         }
 
         public async Task<IActionResult> Register(RegisterRequest request)
         {
-            var login_check = await _context.Users.AnyAsync(x => x.Login == request.Login);
-            if (login_check)
-                return new BadRequestObjectResult(new { error = "Логин уже занят" });
+            var validationError = ValidateRegisterRequest(request);
+            if (validationError != null)
+                return new BadRequestObjectResult(new { error = validationError });
+
+            var login = request.Login.Trim();
+            var name = request.Name.Trim();
+            var loginLower = login.ToLower();
+
+            var loginExists = await _context.Users.AnyAsync(x => x.Login.ToLower() == loginLower);
+            if (loginExists)
+                return new BadRequestObjectResult(new { error = "Login is already taken" });
 
             var user = new User
             {
-                Login = request.Login,
-                Password = request.Password,
-                Name = request.Name,
-                TotalScore = 0
+                Login = login,
+                Name = name,
+                CreatedAtUtc = DateTime.UtcNow
             };
+
+            user.PasswordHash = _passwordHasher.HashPassword(user, request.Password);
 
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
-
-            var progressList = new List<UserProgress>
-            {
-                new UserProgress
-                {
-                    UserId = user.Id,
-                    LevelNumber = 1,
-                    IsUnlocked = true,
-                    IsCompleted = false
-                },
-                new UserProgress
-                {
-                    UserId = user.Id,
-                    LevelNumber = 2,
-                    IsUnlocked = false,
-                    IsCompleted = false
-                },
-                new UserProgress
-                {
-                    UserId = user.Id,
-                    LevelNumber = 3,
-                    IsUnlocked = false,
-                    IsCompleted = false
-                }
-            };
-
-            _context.UserProgresses.AddRange(progressList);
-            await _context.SaveChangesAsync();
-
-            return new OkObjectResult(new
-            {
-                status = true,
-                user = new
-                {
-                    user.Id,
-                    user.Login,
-                    user.Name,
-                    user.TotalScore
-                }
-            });
-        }
-
-        public async Task<IActionResult> Login(LoginRequest request)
-        {
-            var user = await _context.Users
-                .FirstOrDefaultAsync(x => x.Login == request.Login && x.Password == request.Password);
-
-            if (user == null)
-                return new BadRequestObjectResult(new { error = "Неверный логин или пароль" });
 
             var token = _jwtService.GenerateToken(user);
 
             return new OkObjectResult(new
             {
-                status = true,
-                token = token,
-                user = new
-                {
-                    user.Id,
-                    user.Login,
-                    user.Name,
-                    user.TotalScore
-                }
+                token,
+                user = ToUserResponse(user)
+            });
+        }
+
+        public async Task<IActionResult> Login(LoginRequest request)
+        {
+            if (string.IsNullOrWhiteSpace(request.Login))
+                return new BadRequestObjectResult(new { error = "Login is required" });
+
+            if (string.IsNullOrWhiteSpace(request.Password))
+                return new BadRequestObjectResult(new { error = "Password is required" });
+
+            var loginLower = request.Login.Trim().ToLower();
+            var user = await _context.Users
+                .FirstOrDefaultAsync(x => x.Login.ToLower() == loginLower);
+
+            if (user == null ||
+                _passwordHasher.VerifyHashedPassword(user, user.PasswordHash, request.Password) == PasswordVerificationResult.Failed)
+            {
+                return new BadRequestObjectResult(new { error = "Invalid login or password" });
+            }
+
+            var token = _jwtService.GenerateToken(user);
+
+            return new OkObjectResult(new
+            {
+                token,
+                user = ToUserResponse(user)
             });
         }
 
@@ -106,19 +91,39 @@ namespace RustyMangoAPI.Services
             var user = await _context.Users.FirstOrDefaultAsync(x => x.Id == id);
 
             if (user == null)
-                return new BadRequestObjectResult(new { error = "Пользователь не найден" });
+                return new NotFoundObjectResult(new { error = "User not found" });
 
             return new OkObjectResult(new
             {
-                status = true,
-                user = new
-                {
-                    user.Id,
-                    user.Login,
-                    user.Name,
-                    user.TotalScore
-                }
+                user = ToUserResponse(user)
             });
+        }
+
+        private static string? ValidateRegisterRequest(RegisterRequest request)
+        {
+            if (string.IsNullOrWhiteSpace(request.Login))
+                return "Login is required";
+
+            if (string.IsNullOrWhiteSpace(request.Name))
+                return "Name is required";
+
+            if (string.IsNullOrWhiteSpace(request.Password))
+                return "Password is required";
+
+            if (request.Password.Length < 6)
+                return "Password must be at least 6 characters";
+
+            return null;
+        }
+
+        private static object ToUserResponse(User user)
+        {
+            return new
+            {
+                user.Id,
+                user.Login,
+                user.Name
+            };
         }
     }
 }

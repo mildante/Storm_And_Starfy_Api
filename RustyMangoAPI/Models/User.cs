@@ -1,8 +1,4 @@
-﻿using Microsoft.VisualBasic;
-using System.ComponentModel.DataAnnotations;
-using System.Text.Json.Serialization;
-
-namespace RustyMangoApi.Models
+namespace StormAndStarfyApi.Models
 {
     public class User
     {
@@ -10,12 +6,10 @@ namespace RustyMangoApi.Models
 
         public string Login { get; set; } = string.Empty;
 
-        [Required]
-        public string Password { get; set; } = string.Empty;
-
         public string Name { get; set; } = string.Empty;
 
-        public int TotalScore { get; set; } = 0;
+        public string PasswordHash { get; set; } = string.Empty;
 
+        public DateTime CreatedAtUtc { get; set; }
     }
 }

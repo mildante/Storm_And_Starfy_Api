@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="RustyMangoAPI/StormAndStarfyApi.csproj" />
+  <Project Path="StormAndStarfyApi.Tests/StormAndStarfyApi.Tests.csproj" />
+</Solution>
