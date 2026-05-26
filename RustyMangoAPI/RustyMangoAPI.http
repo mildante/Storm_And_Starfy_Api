@@ -1,0 +1,6 @@
+@RustyMangoAPI_HostAddress = http://localhost:5051
+
+GET {{RustyMangoAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
