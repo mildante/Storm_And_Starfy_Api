@@ -7,6 +7,10 @@
       "RelativeMoniker": "D:0:0:{ECADAFE5-A0C8-CD0C-0A21-2B6856D01AF0}|RustyMangoAPI\\StormAndStarfyApi.csproj|solutionrelative:rustymangoapi\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{ECADAFE5-A0C8-CD0C-0A21-2B6856D01AF0}|RustyMangoAPI\\StormAndStarfyApi.csproj|d:\\study\\stormstarfy\\storm_and_starfy_api\\rustymangoapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{ECADAFE5-A0C8-CD0C-0A21-2B6856D01AF0}|RustyMangoAPI\\StormAndStarfyApi.csproj|solutionrelative:rustymangoapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{ECADAFE5-A0C8-CD0C-0A21-2B6856D01AF0}|RustyMangoAPI\\StormAndStarfyApi.csproj|d:\\study\\stormstarfy\\storm_and_starfy_api\\rustymangoapi\\services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{ECADAFE5-A0C8-CD0C-0A21-2B6856D01AF0}|RustyMangoAPI\\StormAndStarfyApi.csproj|solutionrelative:rustymangoapi\\services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
@@ -18,8 +22,20 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\study\\StormStarfy\\Storm_And_Starfy_Api\\RustyMangoAPI\\Program.cs",
+              "RelativeDocumentMoniker": "RustyMangoAPI\\Program.cs",
+              "ToolTip": "D:\\study\\StormStarfy\\Storm_And_Starfy_Api\\RustyMangoAPI\\Program.cs",
+              "RelativeToolTip": "RustyMangoAPI\\Program.cs",
+              "ViewState": "AgIAACEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-26T15:59:16.058Z"
+            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
@@ -28,23 +44,22 @@
               "RelativeDocumentMoniker": "RustyMangoAPI\\Controllers\\AuthController.cs",
               "ToolTip": "D:\\study\\StormStarfy\\Storm_And_Starfy_Api\\RustyMangoAPI\\Controllers\\AuthController.cs",
               "RelativeToolTip": "RustyMangoAPI\\Controllers\\AuthController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACYAAAA2AAAAAAAAAA==",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAAwCUAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-05-26T15:53:18.111Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "UserService.cs",
               "DocumentMoniker": "D:\\study\\StormStarfy\\Storm_And_Starfy_Api\\RustyMangoAPI\\Services\\UserService.cs",
               "RelativeDocumentMoniker": "RustyMangoAPI\\Services\\UserService.cs",
               "ToolTip": "D:\\study\\StormStarfy\\Storm_And_Starfy_Api\\RustyMangoAPI\\Services\\UserService.cs",
               "RelativeToolTip": "RustyMangoAPI\\Services\\UserService.cs",
-              "ViewState": "AgIAAAsAAAAAAAAAAAAAwDcAAAANAAAAAAAAAA==",
+              "ViewState": "AgIAAEoAAAAAAAAAAAAgwDcAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-26T15:51:50.544Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-26T15:51:50.544Z"
             }
           ]
         }
