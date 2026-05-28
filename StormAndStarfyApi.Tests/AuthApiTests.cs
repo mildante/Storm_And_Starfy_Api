@@ -69,7 +69,7 @@ public class AuthApiTests
         var json = await ReadJson(response);
 
         Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
-        Assert.Contains("login", json.RootElement.GetProperty("error").GetString(), StringComparison.OrdinalIgnoreCase);
+        Assert.Contains("Логин", json.RootElement.GetProperty("error").GetString(), StringComparison.OrdinalIgnoreCase);
     }
 
     [Fact]

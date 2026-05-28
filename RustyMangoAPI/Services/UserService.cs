@@ -36,7 +36,7 @@ namespace StormAndStarfyApi.Services
 
             var loginExists = await _context.Users.AnyAsync(x => x.Login.ToLower() == loginLower);
             if (loginExists)
-                return new BadRequestObjectResult(new { error = "Login is already taken" });
+                return new BadRequestObjectResult(new { error = "Логин уже занят" });
 
             var user = new User
             {
@@ -62,10 +62,10 @@ namespace StormAndStarfyApi.Services
         public async Task<IActionResult> Login(LoginRequest request)
         {
             if (string.IsNullOrWhiteSpace(request.Login))
-                return new BadRequestObjectResult(new { error = "Login is required" });
+                return new BadRequestObjectResult(new { error = "Логин обязателен" });
 
             if (string.IsNullOrWhiteSpace(request.Password))
-                return new BadRequestObjectResult(new { error = "Password is required" });
+                return new BadRequestObjectResult(new { error = "Пароль обязателен" });
 
             var loginLower = request.Login.Trim().ToLower();
             var user = await _context.Users
@@ -74,7 +74,7 @@ namespace StormAndStarfyApi.Services
             if (user == null ||
                 _passwordHasher.VerifyHashedPassword(user, user.PasswordHash, request.Password) == PasswordVerificationResult.Failed)
             {
-                return new BadRequestObjectResult(new { error = "Invalid login or password" });
+                return new BadRequestObjectResult(new { error = "Неверный логин или пароль" });
             }
 
             var token = _jwtService.GenerateToken(user);
@@ -91,7 +91,7 @@ namespace StormAndStarfyApi.Services
             var user = await _context.Users.FirstOrDefaultAsync(x => x.Id == id);
 
             if (user == null)
-                return new NotFoundObjectResult(new { error = "User not found" });
+                return new NotFoundObjectResult(new { error = "Пользователь не найден" });
 
             return new OkObjectResult(new
             {
@@ -102,16 +102,16 @@ namespace StormAndStarfyApi.Services
         private static string? ValidateRegisterRequest(RegisterRequest request)
         {
             if (string.IsNullOrWhiteSpace(request.Login))
-                return "Login is required";
+                return "Логин обязателен";
 
             if (string.IsNullOrWhiteSpace(request.Name))
-                return "Name is required";
+                return "Имя обязательно";
 
             if (string.IsNullOrWhiteSpace(request.Password))
-                return "Password is required";
+                return "Пароль обязателен";
 
             if (request.Password.Length < 6)
-                return "Password must be at least 6 characters";
+                return "Пароль должен содержать минимум 6 символов";
 
             return null;
         }

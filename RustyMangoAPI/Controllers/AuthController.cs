@@ -34,7 +34,7 @@ namespace StormAndStarfyApi.Controllers
         {
             var userIdClaim = User.FindFirst("userId")?.Value ?? User.FindFirst("sub")?.Value;
             if (!int.TryParse(userIdClaim, out var userId))
-                return Unauthorized(new { error = "Invalid token" });
+                return Unauthorized(new { error = "Недействительный токен" });
 
             return await _userService.GetUser(userId);
         }
